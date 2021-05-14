@@ -1,4 +1,4 @@
-
+#!bin/bash
 rename_file_min()
 {
 	if [ ! -e "$SRC" ]; then
@@ -78,8 +78,6 @@ rename_file_maj ()
 }
 add_d ()
 {
-	for SRC in "${@:2}"
-	do
 	if [ ! -e "$SRC" ]; then
 			echo "Erreur en [$SRC]: Reprtoire non existant"
 	elif [ -f "$SRC" ];then	
@@ -91,7 +89,6 @@ add_d ()
         [ ! -e "${DST}" ] && mv "${SRC}" "${DST}" || echo "${SRC} n'a pas été rennomé"
     fi
 	fi
-	done
 }
 add_extension()
 {
@@ -107,7 +104,8 @@ add_extension()
     fi
 	fi
 }
-N=$#
+
+echo "$@"
 if [ $# > 2 ];then
 	case $1 in
 		-t) 
@@ -143,5 +141,7 @@ if [ $# > 2 ];then
 		-s) 
 		add_extension $2 $3 
 		;;
+		*)
+		echo "False Argument"
 	esac			
 fi			
