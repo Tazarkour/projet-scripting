@@ -105,8 +105,7 @@ add_extension()
 	fi
 }
 
-echo "$@"
-if [ $# > 2 ];then
+if [ ! "$#" -gt 2 ];then
 	case $1 in
 		-t) 
 		for SRC in "${@:2}"
