@@ -1,0 +1,28 @@
+====================
+------Version-------
+====================
+
+Project Rename V1.0 beta
+
+##
+#Bash program that renames file to
+#lowercase
+#uppercase
+#removes spaces
+#add extensions and removes them
+#marks folder
+##
+
+
+===================================
+---------------Authors-------------
+===================================
+
+This Project was created by Ramy Klouz and Walid Jaouani
+
+
+===================================
+----------Release Date-------------
+===================================
+
+19/05/2021

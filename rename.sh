@@ -109,9 +109,11 @@ add_extension()
     fi
 	fi
 }
-green='\e[32'
-blue='\e[34'
-clear='\e[34'
+show_usage()
+{
+	echo "rename.sh [-h|--help] [-t] [-T] [-n] [-N] (-d] [-m] [-s] chemin..."
+}
+
 ColorGreen(){
     echo -ne "\e[32m"$1"\e[0m"
 }
@@ -128,6 +130,8 @@ $(ColorGreen '      -n)') \e[4;3mEnlever extension\e[0m
 $(ColorGreen '      -N)') \e[4;3mEnlever espaces\e[0m
 $(ColorGreen '      -d)') \e[4;3mRAjouter _d\e[0m
 $(ColorGreen '      -s)') \e[4;3mAjouter extension\e[0m
+$(ColorGreen '      -h |--help)') \e[4;3mAfficher help\e[0m
+$(ColorGreen '      -v)') \e[4;3mAfficher Auteurs\e[0m
 $(ColorGreen '      -e)') \e[4;3mExit\e[0m
 $(ColorBlue 'Choose an option:') "
         read b
@@ -250,6 +254,24 @@ $(ColorBlue 'Choose an option:') "
 		menu
 		;;
 		-e)  ;;
+		-h) less README.txt
+		read -p "Press any key to continue"
+		clear
+		meanu
+		;;
+		--help) less README.txt
+		read -p "Press any key to continue"
+		clear
+		meanu
+		;;
+		-v) less info.txt
+		read -p "Press any key to continue"
+		clear
+		meanu
+		;;
+		-g) bash graphic_menu.sh
+		menu
+		;;
 		*)
 		echo -e "\e[1;32m Argument Faux \e[0m"	
 		menu
@@ -258,7 +280,7 @@ $(ColorBlue 'Choose an option:') "
 }
 
 if [ "$#" = 0 ];then
-	menu
+	show_usage
 fi
 
 
@@ -412,6 +434,16 @@ elif [  "$#" = 1 ];then
 			fi
 		done	
 		add_extension ${F[0]} ${F[1]}
+		;;
+		-m)
+		menu
+		;;
+		-h)
+		less README.txt
+		;;
+		-v) less info.txt
+		;;
+		-g) bash graphic_menu.sh
 		;;
 		*)
 		echo -e "\e[1;32m Argument Faux \e[0m"
