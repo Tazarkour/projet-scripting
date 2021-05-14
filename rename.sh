@@ -109,6 +109,157 @@ add_extension()
     fi
 	fi
 }
+green='\e[32'
+blue='\e[34'
+clear='\e[34'
+ColorGreen(){
+    echo -ne "\e[32m"$1"\e[0m"
+}
+ColorBlue(){
+    echo -ne "\e[34m"$1"\e[0m"
+}
+menu()
+{
+	echo -ne "
+\e[31;5m        M E N U\e[25m
+$(ColorGreen '      -t)') \e[4;3mRennomer Miniscule\e[0m
+$(ColorGreen '      -T)') \e[4;3mRennomer Majiscule\e[0m
+$(ColorGreen '      -n)') \e[4;3mEnlever extension\e[0m
+$(ColorGreen '      -N)') \e[4;3mEnlever espaces\e[0m
+$(ColorGreen '      -d)') \e[4;3mRAjouter _d\e[0m
+$(ColorGreen '      -s)') \e[4;3mAjouter extension\e[0m
+$(ColorGreen '      -e)') \e[4;3mExit\e[0m
+$(ColorBlue 'Choose an option:') "
+        read b
+        case $b in
+		-t)
+		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') : \e[0m"
+		read a
+		N=${#a}
+		for i in $(seq 0 $N)
+			do
+				if [ ! ${a:$i:1} = ',' ];then
+				char="${a:$i:1}"
+				name_new+=$char
+			else
+				F+=("$name_new")
+				name_new=""
+			fi
+		done	
+		for SRC in "${F[@]}"
+		do
+			rename_file_min SRC
+		done
+		menu
+		;;
+		-T) 
+		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') : \e[0m"
+		read a
+		N=${#a}
+		for i in $(seq 0 $N)
+			do
+				if [ ! ${a:$i:1} = ',' ];then
+				char="${a:$i:1}"
+				name_new+=$char
+			else
+				F+=("$name_new")
+				name_new=""
+			fi
+		done	
+		for SRC in "${F[@]}"
+		do
+			rename_file_maj SRC
+		done
+		menu
+		;;
+		-n)
+		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') : \e[0m"
+		read a
+		N=${#a}
+		for i in $(seq 0 $N)
+			do
+				if [ ! ${a:$i:1} = ',' ];then
+				char="${a:$i:1}"
+				name_new+=$char
+			else
+				F+=("$name_new")
+				name_new=""
+			fi
+		done	
+		for SRC in "${F[@]}"
+		do
+			remove_extention SRC
+		done
+		menu
+		;;
+		-N) 
+		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') : \e[0m"
+		read a
+		N=${#a}
+		for i in $(seq 0 $N)
+			do
+				if [ ! ${a:$i:1} = ',' ];then
+				char="${a:$i:1}"
+				name_new+=$char
+			else
+				F+=("$name_new")
+				name_new=""
+			fi
+		done	
+		for SRC in "${F[@]}"
+		do
+			remove_space SRC
+		done
+		menu
+		;;
+		-d)
+		eecho -e "\e[1;32mInserer les nom des dossiers (Si le nom Contient des espaces inserer le entre '') : \e[0m"
+		read a
+		N=${#a}
+		for i in $(seq 0 $N)
+			do
+				if [ ! ${a:$i:1} = ',' ];then
+				char="${a:$i:1}"
+				name_new+=$char
+			else
+				F+=("$name_new")
+				name_new=""
+			fi
+		done	
+		for SRC in "${F[@]}"
+		do
+			add_d SRC
+		done
+		menu
+		;;
+		-s) 
+		echo -e "\e[1;32mInserer le nom du fichier puis son extension : \e[0m"
+		read SRC
+		N=${#SRC}
+		for i in $(seq 0 $N)
+			do
+				if [ ! ${SRC:$i:1} = ' ' ];then
+				char="${SRC:$i:1}"
+				name_new+=$char
+			else
+				F+=("$name_new")
+				name_new=""
+			fi
+		done	
+		add_extension ${F[0]} ${F[1]}
+		menu
+		;;
+		-e)  ;;
+		*)
+		echo -e "\e[1;32m Argument Faux \e[0m"	
+		menu
+		;;		
+        esac
+}
+
+if [ "$#" = 0 ];then
+	menu
+fi
 
 
 if [  "$#" -gt 1 ];then
