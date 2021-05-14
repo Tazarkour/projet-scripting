@@ -20,23 +20,23 @@ rename_file_min()
 
 remove_space()
 {
-		if [ ! -e $SRC ];then
+		if [ ! -e "$SRC" ];then
 			echo "Erreur en [$SRC]: Fichier/répertoire introuvable"
 		else
-    name="$SRC"
+    name=`basename "${SRC}"`
 	name_new=""
 	char=""
 			N=${#SRC}
 			i=0
 			for i in $(seq 0 $N)
 			do
-				if [ ! ${SRC:$i:1} = ' ' ];then
-				char="${SRC:$i:1}"
+				if [ ! ${name:$i:1} = ' ' ];then
+				char="${name:$i:1}"
 				name_new+=$char
 			fi
 			done	
 			if [ -d "$SRC" ];then
-			DST=`dirname "${SRC}"`/"${name_new}" 
+			DST=`dirname "${SRC}"`/"${name_new}"
 			mv "$SRC" "$DST" 
 			elif [ -f "$SRC" ];then
 				DST=`dirname "${SRC}"`/"${name_new}" 
@@ -108,6 +108,47 @@ add_extension()
 if [ ! "$#" -gt 2 ];then
 	case $1 in
 		-t) 
+		for SRC in "${@:2}"
+		do
+			rename_file_min SRC
+		done
+		;;
+		-T) 
+		for SRC in "${@:2}"
+		do
+			rename_file_maj SRC
+		done
+		;;
+		-n) 
+		for SRC in "${@:2}"
+		do
+			remove_extention SRC
+		done
+		;;
+		-N) 
+		for SRC in "${@:2}"
+		do
+			remove_space SRC
+		done
+		;;
+		-d) 
+		for SRC in "${@:2}"
+		do
+			add_d SRC
+		done
+		;;
+		-s) 
+		add_extension $2 $3 
+		;;
+		*)
+		echo "False Argument"
+	esac	
+elif [ ! "$#" = 2 ];then
+	case $1 in
+		-t) 
+		echo "inserer les nom des fichiers/dossiers : "
+		read SRC
+
 		for SRC in "${@:2}"
 		do
 			rename_file_min SRC
