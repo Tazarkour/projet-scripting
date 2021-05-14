@@ -1,10 +1,8 @@
-<<COMMENT1
+
 rename_file_min()
 {
-	for SRC in "${@:2}"
-	do
 	if [ ! -e "$SRC" ]; then
-			echo "fichier non existant"
+			echo "Erreur en [$SRC]: Fichier/répertoire introuvable"
 	elif [ -f "$SRC" ];then	
     DST=`dirname "${SRC}"`/`basename "${SRC}" | tr '[A-Z]' '[a-z]'`
     if [ "${SRC}" != "${DST}" ]
@@ -18,14 +16,13 @@ rename_file_min()
         [ ! -e "${DST}" ] && mv "${SRC}" "${DST}" || echo "${SRC} was not renamed"
     fi
 	fi
-	done
 }
-COMMENT1
-<<COMMENT2
-#remove_space()
-#{
-	for SRC in "${@:2}"
-	do
+
+remove_space()
+{
+		if [ ! -e $SRC ];then
+			echo "Erreur en [$SRC]: Fichier/répertoire introuvable"
+		else
     name="$SRC"
 	name_new=""
 	char=""
@@ -45,18 +42,13 @@ COMMENT1
 				DST=`dirname "${SRC}"`/"${name_new}" 
 			mv -T "$SRC" "$DST" 
 		fi
-			
-	done
-#}
-COMMENT2
-<<COMMENT3
-#remove_extention()
-#{
-for SRC in "${@:2}"
-	do
+	fi		
+}
+remove_extention()
+{
 	if [! -e $SRC ];then
-	echo "fichier introuvable"
-	if [ -f $SRC ];then
+	echo "Erreur en [$SRC]: fichier introuvable"
+	elif [ -f $SRC ];then
 	DST=`dirname "${SRC}"`/`basename "${SRC}" | cut -f 1 -d '.'`
 	if [ "${SRC}" != "${DST}" ]
     then
@@ -65,16 +57,11 @@ for SRC in "${@:2}"
 	elif [ -d $SRC ];then
 	echo "insert a file not a folder"
 	fi
-	done
-#}
-COMMENT3
-<<COMMENT4
-#rename_file_maj ()
-#{
-	for SRC in "${@:2}"
-	do
+}
+rename_file_maj ()
+{
 	if [ ! -e "$SRC" ]; then
-			echo "fichier non existant"
+			echo "Erreur en [$SRC]: Fichier/répertoire introuvable"
 	elif [ -f "$SRC" ];then	
     DST=`dirname "${SRC}"`/`basename "${SRC}" | tr '[a-z]' '[A-Z]'`
     if [ "${SRC}" != "${DST}" ]
@@ -88,8 +75,73 @@ COMMENT3
         [ ! -e "${DST}" ] && mv "${SRC}" "${DST}" || echo "${SRC} was not renamed"
     fi
 	fi
+}
+add_d ()
+{
+	for SRC in "${@:2}"
+	do
+	if [ ! -e "$SRC" ]; then
+			echo "Erreur en [$SRC]: Reprtoire non existant"
+	elif [ -f "$SRC" ];then	
+    echo "Erreur en [$SRC]: Entrez un Repertoire valide"
+    elif [ -d "$SRC" ];then	
+    DST=`dirname "${SRC}"`/`basename "${SRC}"`"_d"
+    if [ "${SRC}" != "${DST}" ]
+    then
+        [ ! -e "${DST}" ] && mv "${SRC}" "${DST}" || echo "${SRC} n'a pas été rennomé"
+    fi
+	fi
 	done
-#}
-COMMENT4
-
-
+}
+add_extension()
+{
+	if [ ! -e "$1" ]; then
+			echo "Erreur en [$1]: Fichier non existant"
+	elif [ -d "$1" ];then	
+    echo "Erreur en [$1]: Entrez un Fichier valide"
+    elif [ -f "$1" ];then	
+    DST=`dirname "${1}"`/`basename "${1}"`".""$2"
+    if [ "${2}" != "${DST}" ]
+    then
+        [ ! -e "${DST}" ] && mv -T "${1}" "${DST}" || echo "${1} n'a pas été rennomé"
+    fi
+	fi
+}
+N=$#
+if [ $# > 2 ];then
+	case $1 in
+		-t) 
+		for SRC in "${@:2}"
+		do
+			rename_file_min SRC
+		done
+		;;
+		-T) 
+		for SRC in "${@:2}"
+		do
+			rename_file_maj SRC
+		done
+		;;
+		-n) 
+		for SRC in "${@:2}"
+		do
+			remove_extention SRC
+		done
+		;;
+		-N) 
+		for SRC in "${@:2}"
+		do
+			remove_space SRC
+		done
+		;;
+		-d) 
+		for SRC in "${@:2}"
+		do
+			add_d SRC
+		done
+		;;
+		-s) 
+		add_extension $2 $3 
+		;;
+	esac			
+fi			
