@@ -132,6 +132,7 @@ $(ColorGreen '      -d)') \e[4;3mRAjouter _d\e[0m
 $(ColorGreen '      -s)') \e[4;3mAjouter extension\e[0m
 $(ColorGreen '      -h |--help)') \e[4;3mAfficher help\e[0m
 $(ColorGreen '      -v)') \e[4;3mAfficher Auteurs\e[0m
+$(ColorGreen '      -g)') \e[4;3mAfficher Menu Graphique\e[0m
 $(ColorGreen '      -e)') \e[4;3mExit\e[0m
 $(ColorBlue 'Choose an option:') "
         read b
