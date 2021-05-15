@@ -269,7 +269,6 @@ then
 				name_new=""
 			fi
 		done	
-fi
  
 elif [ $ans -eq 8 ]
 then
