@@ -155,7 +155,7 @@ if [ $ans -eq 2 ];then
     N=${#a}
 		for i in $(seq 0 $N)
 			do
-				if [ ! ${a:$i:1} = ',' ];then
+				if [ ! ${a:$i:1} == '&' ] || [[ ${a:$i:1} == " " ]];then
 				char="${a:$i:1}"
 				name_new+=$char
 			else
@@ -175,7 +175,7 @@ elif [ $ans -eq 3 ];then
     N=${#a}
 		for i in $(seq 0 $N)
 			do
-				if [ ! ${a:$i:1} = ',' ];then
+				if [ ! ${a:$i:1} == '&' ] || [[ ${a:$i:1} == " " ]];then
 				char="${a:$i:1}"
 				name_new+=$char
 			else
@@ -196,7 +196,7 @@ then
     N=${#a}
 		for i in $(seq 0 $N)
 			do
-				if [ ! ${a:$i:1} = ',' ];then
+				if [ ! ${a:$i:1} == '&' ] || [[ ${a:$i:1} == " " ]];then
 				char="${a:$i:1}"
 				name_new+=$char
 			else
@@ -218,7 +218,7 @@ then
     N=${#a}
 		for i in $(seq 0 $N)
 			do
-				if [ ! ${a:$i:1} = ',' ];then
+				if [ ! ${a:$i:1} == '&' ] || [[ ${a:$i:1} == " " ]];then
 				char="${a:$i:1}"
 				name_new+=$char
 			else
@@ -240,7 +240,7 @@ then
     N=${#a}
 		for i in $(seq 0 $N)
 			do
-				if [ ! ${a:$i:1} = ',' ];then
+				if [ ! ${a:$i:1} == '&' ] || [[ ${a:$i:1} == " " ]];then
 				char="${a:$i:1}"
 				name_new+=$char
 			else
@@ -261,13 +261,15 @@ then
     N=${#a}
 		for i in $(seq 0 $N)
 			do
-				if [ ! ${a:$i:1} = ' ' ];then
+				if [ ! ${a:$i:1} = '&' ] || [[ ${a:$i:1} == " " ]];then
 				char="${a:$i:1}"
 				name_new+=$char
 			else
 				F+=("$name_new")
 				name_new=""
 			fi
+			add_extension ${F[0]} ${F[1]}
+
 		done	
  
 elif [ $ans -eq 8 ]

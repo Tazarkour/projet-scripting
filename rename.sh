@@ -138,19 +138,20 @@ $(ColorBlue 'Choose an option:') "
         read b
         case $b in
 		-t)
-		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') : \e[0m"
+		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') spearer par &: \e[0m"
 		read a
 		N=${#a}
 		for i in $(seq 0 $N)
 			do
-				if [ ! ${a:$i:1} = ',' ];then
+				if [ ! ${a:$i:1} == '&' ] || [[ ${a:$i:1} == " " ]];then
+					#echo "1"
 				char="${a:$i:1}"
 				name_new+=$char
 			else
 				F+=("$name_new")
 				name_new=""
 			fi
-		done	
+		done		
 		for SRC in "${F[@]}"
 		do
 			rename_file_min SRC
@@ -158,18 +159,20 @@ $(ColorBlue 'Choose an option:') "
 		menu
 		;;
 		-T) 
-		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') : \e[0m"
+		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') spearer par &: \e[0m"
 		read a
 		N=${#a}
 		for i in $(seq 0 $N)
 			do
-				if [ ! ${a:$i:1} = ',' ];then
+				if [ ! ${a:$i:1} == '&' ] || [[ ${a:$i:1} == " " ]];then
+					#echo "1"
 				char="${a:$i:1}"
 				name_new+=$char
 			else
 				F+=("$name_new")
 				name_new=""
 			fi
+		done	
 		done	
 		for SRC in "${F[@]}"
 		do
@@ -178,18 +181,20 @@ $(ColorBlue 'Choose an option:') "
 		menu
 		;;
 		-n)
-		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') : \e[0m"
+		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') spearer par &: \e[0m"
 		read a
 		N=${#a}
 		for i in $(seq 0 $N)
 			do
-				if [ ! ${a:$i:1} = ',' ];then
+				if [ ! ${a:$i:1} == '&' ] || [[ ${a:$i:1} == " " ]];then
+					#echo "1"
 				char="${a:$i:1}"
 				name_new+=$char
 			else
 				F+=("$name_new")
 				name_new=""
 			fi
+		done	
 		done	
 		for SRC in "${F[@]}"
 		do
@@ -198,12 +203,13 @@ $(ColorBlue 'Choose an option:') "
 		menu
 		;;
 		-N) 
-		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') : \e[0m"
+		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') spearer par &: \e[0m"
 		read a
 		N=${#a}
 		for i in $(seq 0 $N)
 			do
-				if [ ! ${a:$i:1} = ',' ];then
+				if [ ! ${a:$i:1} == '&' ] || [[ ${a:$i:1} == " " ]];then
+					#echo "1"
 				char="${a:$i:1}"
 				name_new+=$char
 			else
@@ -214,16 +220,18 @@ $(ColorBlue 'Choose an option:') "
 		for SRC in "${F[@]}"
 		do
 			remove_space SRC
+			echo "$SRC"
 		done
 		menu
 		;;
 		-d)
-		eecho -e "\e[1;32mInserer les nom des dossiers (Si le nom Contient des espaces inserer le entre '') : \e[0m"
+		eecho -e "\e[1;32mInserer les nom des dossiers (Si le nom Contient des espaces inserer le entre '') spearer par &: \e[0m"
 		read a
 		N=${#a}
 		for i in $(seq 0 $N)
 			do
-				if [ ! ${a:$i:1} = ',' ];then
+				if [ ! ${a:$i:1} == '&' ] || [[ ${a:$i:1} == " " ]];then
+					#echo "1"
 				char="${a:$i:1}"
 				name_new+=$char
 			else
@@ -243,7 +251,7 @@ $(ColorBlue 'Choose an option:') "
 		N=${#SRC}
 		for i in $(seq 0 $N)
 			do
-				if [ ! ${SRC:$i:1} = ' ' ];then
+				if [ ! ${SRC:$i:1} = '&' ]|| [[ ${a:$i:1} == " " ]];then
 				char="${SRC:$i:1}"
 				name_new+=$char
 			else
@@ -326,12 +334,13 @@ if [  "$#" -gt 1 ];then
 elif [  "$#" = 1 ];then
 	case $1 in
 		-t)
-		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') : \e[0m"
+		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') : séparer par & \e[0m"
 		read a
 		N=${#a}
 		for i in $(seq 0 $N)
 			do
-				if [ ! ${a:$i:1} = ',' ];then
+				if [ ! ${a:$i:1} == '&' ] || [[ ${a:$i:1} == " " ]];then
+					#echo "1"
 				char="${a:$i:1}"
 				name_new+=$char
 			else
@@ -345,12 +354,13 @@ elif [  "$#" = 1 ];then
 		done
 		;;
 		-T) 
-		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') : \e[0m"
+		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '')  éparer par & : \e[0m"
 		read a
 		N=${#a}
 		for i in $(seq 0 $N)
 			do
-				if [ ! ${a:$i:1} = ',' ];then
+				if [ ! ${a:$i:1} == '&' ] || [[ ${a:$i:1} == " " ]];then
+					#echo "1"
 				char="${a:$i:1}"
 				name_new+=$char
 			else
@@ -364,12 +374,14 @@ elif [  "$#" = 1 ];then
 		done
 		;;
 		-n)
-		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') : \e[0m"
+		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') éparer par & : \e[0m"
+		read a
 		read a
 		N=${#a}
 		for i in $(seq 0 $N)
 			do
-				if [ ! ${a:$i:1} = ',' ];then
+				if [ ! ${a:$i:1} == '&' ] || [[ ${a:$i:1} == " " ]];then
+					#echo "1"
 				char="${a:$i:1}"
 				name_new+=$char
 			else
@@ -379,16 +391,18 @@ elif [  "$#" = 1 ];then
 		done	
 		for SRC in "${F[@]}"
 		do
+			
 			remove_extention SRC
 		done
 		;;
 		-N) 
-		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') : \e[0m"
+		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '')  séparer les fichers par &: \e[0m"
 		read a
 		N=${#a}
 		for i in $(seq 0 $N)
 			do
-				if [ ! ${a:$i:1} = ',' ];then
+				if [ ! ${a:$i:1} == '&' ] || [[ ${a:$i:1} == " " ]];then
+					#echo "1"
 				char="${a:$i:1}"
 				name_new+=$char
 			else
@@ -402,12 +416,13 @@ elif [  "$#" = 1 ];then
 		done
 		;;
 		-d)
-		eecho -e "\e[1;32mInserer les nom des dossiers (Si le nom Contient des espaces inserer le entre '') : \e[0m"
+		echo -e "\e[1;32mInserer les nom des dossiers (Si le nom Contient des espaces inserer le entre '') séparer les fichers par &: \e[0m"
 		read a
 		N=${#a}
 		for i in $(seq 0 $N)
 			do
-				if [ ! ${a:$i:1} = ',' ];then
+				if [ ! ${a:$i:1} == '&' ] || [[ ${a:$i:1} == " " ]];then
+					#echo "1"
 				char="${a:$i:1}"
 				name_new+=$char
 			else
@@ -426,7 +441,7 @@ elif [  "$#" = 1 ];then
 		N=${#SRC}
 		for i in $(seq 0 $N)
 			do
-				if [ ! ${SRC:$i:1} = ' ' ];then
+				if [ ! ${SRC:$i:1} = '&' ]|| [[ ${a:$i:1} == " " ]];then
 				char="${SRC:$i:1}"
 				name_new+=$char
 			else
