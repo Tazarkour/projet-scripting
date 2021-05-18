@@ -270,11 +270,10 @@ then
 			else
 				F+=("$name_new")
 				name_new=""
-				echo "$name_new"
-			fi
-			add_extension ${F[0]} ${F[1]}
 
+			fi
 		done	
+		add_extension ${F[0]} ${F[1]}
 		F=""
  
 elif [ $ans -eq 8 ]

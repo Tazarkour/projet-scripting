@@ -221,7 +221,6 @@ $(ColorBlue 'Choose an option:') "
 		for SRC in "${F[@]}"
 		do
 			remove_space SRC
-			echo "$SRC"
 		done
 		menu
 		F=""
@@ -381,7 +380,6 @@ elif [  "$#" = 1 ];then
 		;;
 		-n)
 		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') éparer par & : \e[0m"
-		read a
 		read a
 		N=${#a}
 		for i in $(seq 0 $N)
