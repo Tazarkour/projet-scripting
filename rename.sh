@@ -48,7 +48,7 @@ remove_space()
 }
 remove_extention()
 {
-	if [! -e $SRC ];then
+	if [ ! -e $SRC ];then
 	echo -e "\e[1;31m Erreur en [$SRC]: \e[0m"
 			echo "Fichier non existant"
 	elif [ -f $SRC ];then
@@ -157,6 +157,7 @@ $(ColorBlue 'Choose an option:') "
 			rename_file_min SRC
 		done
 		menu
+		F=""
 		;;
 		-T) 
 		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') spearer par &: \e[0m"
@@ -172,13 +173,13 @@ $(ColorBlue 'Choose an option:') "
 				F+=("$name_new")
 				name_new=""
 			fi
-		done	
-		done	
+		done		
 		for SRC in "${F[@]}"
 		do
 			rename_file_maj SRC
 		done
 		menu
+		F=""
 		;;
 		-n)
 		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') spearer par &: \e[0m"
@@ -194,13 +195,13 @@ $(ColorBlue 'Choose an option:') "
 				F+=("$name_new")
 				name_new=""
 			fi
-		done	
-		done	
+		done		
 		for SRC in "${F[@]}"
 		do
 			remove_extention SRC
 		done
 		menu
+		F=""
 		;;
 		-N) 
 		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') spearer par &: \e[0m"
@@ -223,6 +224,7 @@ $(ColorBlue 'Choose an option:') "
 			echo "$SRC"
 		done
 		menu
+		F=""
 		;;
 		-d)
 		eecho -e "\e[1;32mInserer les nom des dossiers (Si le nom Contient des espaces inserer le entre '') spearer par &: \e[0m"
@@ -244,6 +246,7 @@ $(ColorBlue 'Choose an option:') "
 			add_d SRC
 		done
 		menu
+		F=""
 		;;
 		-s) 
 		echo -e "\e[1;32mInserer le nom du fichier puis son extension : \e[0m"
@@ -261,6 +264,7 @@ $(ColorBlue 'Choose an option:') "
 		done	
 		add_extension ${F[0]} ${F[1]}
 		menu
+		F=""
 		;;
 		-e)  ;;
 		-h) less README.txt
@@ -352,6 +356,7 @@ elif [  "$#" = 1 ];then
 		do
 			rename_file_min SRC
 		done
+		F=""
 		;;
 		-T) 
 		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '')  éparer par & : \e[0m"
@@ -372,6 +377,7 @@ elif [  "$#" = 1 ];then
 		do
 			rename_file_maj SRC
 		done
+		F=""
 		;;
 		-n)
 		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '') éparer par & : \e[0m"
@@ -394,6 +400,7 @@ elif [  "$#" = 1 ];then
 			
 			remove_extention SRC
 		done
+		F=""
 		;;
 		-N) 
 		echo -e "\e[1;32mInserer les nom des fichiers/dossiers (Si le nom Contient des espaces inserer le entre '')  séparer les fichers par &: \e[0m"
@@ -414,6 +421,7 @@ elif [  "$#" = 1 ];then
 		do
 			remove_space SRC
 		done
+		F=""
 		;;
 		-d)
 		echo -e "\e[1;32mInserer les nom des dossiers (Si le nom Contient des espaces inserer le entre '') séparer les fichers par &: \e[0m"
@@ -434,6 +442,7 @@ elif [  "$#" = 1 ];then
 		do
 			add_d SRC
 		done
+		F=""
 		;;
 		-s) 
 		echo -e "\e[1;32mInserer le nom du fichier puis son extension : \e[0m"
@@ -450,6 +459,7 @@ elif [  "$#" = 1 ];then
 			fi
 		done	
 		add_extension ${F[0]} ${F[1]}
+		F=""
 		;;
 		-m)
 		menu
