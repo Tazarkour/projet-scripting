@@ -14,31 +14,22 @@ OPTIONS
 
 	-t 
 		Renames files or directories put as parameter to downcase
-
 	-T 
 		Renames files or directories put as parameter to Upcase
-
 	-n 
 		Removes Extension from files put in parameter
-
 	-N
-		Removes Spaces from file or directory names	put in parameter
-
+		Removes Spaces from file/directory names in parameter (between quotation marks)
 	-d
 		Adds _d to folders put in parameter
-
 	-s 
 		Adds extension to file put in parameter
-
 	-g
 		Shows Graphical Menu
-
 	-m			
 		Shows textual menu
-
 	-v
 		Shows author names and info
-
 	-h --help
 		Shows the readmefile
 
