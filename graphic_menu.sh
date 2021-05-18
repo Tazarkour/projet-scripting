@@ -48,7 +48,7 @@ remove_space()
 }
 remove_extention()
 {
-	if [! -e $SRC ];then
+	if [ ! -e $SRC ];then
 	echo -e "\e[1;31m Erreur en [$SRC]: \e[0m"
 			echo "Fichier non existant"
 	elif [ -f $SRC ];then
@@ -190,7 +190,7 @@ elif [ $ans -eq 3 ];then
 		done 
 fi
 F=""
-elif [ $ans -eq 5 ]
+elif [ $ans -eq 4 ]
 then
     insert_input_all $a
     ans=$?
@@ -212,7 +212,7 @@ then
 		done 
 fi
     F=""
-elif [ $ans -eq 4 ]
+elif [ $ans -eq 5 ]
 then
     insert_input_all $a
     ans=$?
