@@ -167,7 +167,8 @@ if [ $ans -eq 2 ];then
 		do
 			rename_file_min SRC
 		done
-	fi       
+	fi  
+	F=""     
 elif [ $ans -eq 3 ];then
  	insert_input_all $a
     ans=$?
@@ -188,7 +189,8 @@ elif [ $ans -eq 3 ];then
 			rename_file_maj SRC
 		done 
 fi
-elif [ $ans -eq 4 ]
+F=""
+elif [ $ans -eq 5 ]
 then
     insert_input_all $a
     ans=$?
@@ -209,8 +211,8 @@ then
 			remove_extention SRC
 		done 
 fi
-    
-elif [ $ans -eq 5 ]
+    F=""
+elif [ $ans -eq 4 ]
 then
     insert_input_all $a
     ans=$?
@@ -231,7 +233,7 @@ then
 			remove_space SRC
 		done 
 fi
- 
+ F=""
 elif [ $ans -eq 6 ]
 then
     insert_input_all $a
@@ -253,6 +255,7 @@ then
 			add_d SRC
 		done 
 fi
+F=""
       
 elif [ $ans -eq 7 ]
 then
@@ -267,10 +270,12 @@ then
 			else
 				F+=("$name_new")
 				name_new=""
+				echo "$name_new"
 			fi
 			add_extension ${F[0]} ${F[1]}
 
 		done	
+		F=""
  
 elif [ $ans -eq 8 ]
 then

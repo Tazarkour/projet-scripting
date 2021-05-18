@@ -227,7 +227,7 @@ $(ColorBlue 'Choose an option:') "
 		F=""
 		;;
 		-d)
-		eecho -e "\e[1;32mInserer les nom des dossiers (Si le nom Contient des espaces inserer le entre '') spearer par &: \e[0m"
+		echo -e "\e[1;32mInserer les nom des dossiers (Si le nom Contient des espaces inserer le entre '') spearer par &: \e[0m"
 		read a
 		N=${#a}
 		for i in $(seq 0 $N)
